@@ -3,6 +3,9 @@
 #include "led_manager.h"
 #include "wifi_manager.h"
 #include "web_server.h"
+#include "time_manager.h"
+#include "firebase_manager.h"
+#include "device_manager.h"
 
 
 void setup()
@@ -16,6 +19,8 @@ void setup()
     Serial.println("ESP32 WiFi Health Monitor");
     Serial.println("Booting...");
     Serial.println("==============================");
+
+    deviceManagerBegin();
 
 
     // Blue = booting
@@ -33,6 +38,11 @@ void setup()
     Serial.println(
         "[MAIN] Wi-Fi manager initialized."
     );
+
+
+    timeManagerBegin();
+
+    firebaseManagerBegin();
 
 
     // Web server
@@ -64,6 +74,8 @@ void setup()
 void loop()
 {
     wifiManagerLoop();
+
+    firebaseManagerLoop();
 
     webServerLoop();
 
