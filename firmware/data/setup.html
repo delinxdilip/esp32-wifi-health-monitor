@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ESP32 • Wi-Fi Setup</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+</head>
+
+<body>
+
+    <main class="page">
+
+        <section class="setup-container">
+
+            <div class="brand">
+                <div class="brand-icon">E</div>
+
+                <div>
+                    <div class="brand-name">
+                        ESP32
+                    </div>
+
+                    <div class="brand-subtitle">
+                        HEALTH MONITOR
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="setup-card">
+
+                <div class="status-dot"></div>
+
+                <h1>
+                    Wi-Fi Setup
+                </h1>
+
+                <p class="description">
+                    Connect your ESP32 to a Wi-Fi
+                    network to start monitoring
+                    device health.
+                </p>
+
+
+                <form id="wifiForm">
+
+                    <div class="form-group">
+
+                        <label for="ssid">
+                            Wi-Fi Network
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ssid"
+                            name="ssid"
+                            placeholder="Enter Wi-Fi SSID"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Wi-Fi Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter Wi-Fi password"
+                                autocomplete="off"
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="connectButton"
+                    >
+
+                        <span id="buttonText">
+                            Connect to Wi-Fi
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <div
+                    id="status"
+                    class="status-message hidden"
+                ></div>
+
+            </div>
+
+
+            <p class="footer-text">
+                ESP32 Local Configuration
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="/app.js"></script>
+
+</body>
+
+</html>
