@@ -5,3 +5,9 @@
 .vscode/launch.json
 .vscode/ipch/
 .vscode/.cortex-debug*
+
+secrets.env
+.env
+.env.*
+!.env.example
+!.dummy.env

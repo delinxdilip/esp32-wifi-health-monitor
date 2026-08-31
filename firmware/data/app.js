@@ -357,6 +357,26 @@ async function updateDashboard() {
             data.ssid
         );
 
+        updateElement(
+            "deviceId",
+            data.deviceId
+        );
+
+        updateElement(
+            "edgeName",
+            data.edgeName
+        );
+
+        updateElement(
+            "model",
+            data.model
+        );
+
+        updateElement(
+            "firmware",
+            data.firmware
+        );
+
 
         updateElement(
             "rssi",

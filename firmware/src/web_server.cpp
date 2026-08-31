@@ -1,17 +1,38 @@
 #include "web_server.h"
+#include "device_config.h"
+#include "wifi_manager.h"
 
 #include <Arduino.h>
 #include <WebServer.h>
 #include <LittleFS.h>
 #include <WiFi.h>
 
-#include "wifi_manager.h"
-
 
 namespace
 {
 
 WebServer server(80);
+
+// ============================================================
+// DEVICE ID
+// ============================================================
+
+String getDeviceId()
+{
+    uint64_t chipId = ESP.getEfuseMac();
+
+    char deviceId[17];
+
+    snprintf(
+        deviceId,
+        sizeof(deviceId),
+        "%04X%08X",
+        (uint16_t)(chipId >> 32),
+        (uint32_t)chipId
+    );
+
+    return String(deviceId);
+}
 
 // ============================================================
 // ESP32 INTERNAL TEMPERATURE
@@ -460,8 +481,21 @@ void handleStatus()
     );
     json += ",";
 
+    json += "\"deviceId\":\"";
+    json += getDeviceId();
+    json += "\",";
 
-    json += "\"firmware\":\"1.0.0\"";
+    json += "\"edgeName\":\"";
+    json += EDGE_NAME;
+    json += "\",";
+
+    json += "\"model\":\"";
+    json += DEVICE_MODEL;
+    json += "\",";
+
+    json += "\"firmware\":\"";
+    json += FIRMWARE_VERSION;
+    json += "\"";
 
 
     json += "}";
