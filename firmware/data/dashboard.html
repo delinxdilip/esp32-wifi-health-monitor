@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ESP32 • Health Monitor</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="dashboard-page">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    E
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        ESP32
+                    </div>
+
+                    <div class="brand-subtitle">
+                        HEALTH MONITOR
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="device-status">
+
+                <span
+                    id="connectionIndicator"
+                    class="online-dot"
+                ></span>
+
+                <span id="connectionStatus">
+                    Online
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN CONTENT -->
+
+        <section class="dashboard-content">
+
+            <div class="page-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        DEVICE OVERVIEW
+                    </p>
+
+                    <h1>
+                        System Health
+                    </h1>
+
+                    <p class="heading-description">
+                        Real-time status of your ESP32
+                        device and network connection.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- WIFI SECTION -->
+
+            <section class="dashboard-section">
+
+                <div class="section-title">
+
+                    <span class="section-icon">
+                        ◉
+                    </span>
+
+                    <h2>
+                        Wi-Fi
+                    </h2>
+
+                </div>
+
+
+                <div class="cards-grid">
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            NETWORK
+                        </span>
+
+                        <strong
+                            id="ssid"
+                            class="metric-value"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            SIGNAL
+                        </span>
+
+                        <strong
+                            id="rssi"
+                            class="metric-value"
+                        >
+                            —
+                        </strong>
+
+                        <span class="metric-unit">
+                            dBm
+                        </span>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            QUALITY
+                        </span>
+
+                        <strong
+                            id="quality"
+                            class="metric-value"
+                        >
+                            —
+                        </strong>
+
+                        <span class="metric-unit">
+                            %
+                        </span>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            IP ADDRESS
+                        </span>
+
+                        <strong
+                            id="ip"
+                            class="metric-value metric-small"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DEVICE SECTION -->
+
+            <section class="dashboard-section">
+
+                <div class="section-title">
+
+                    <span class="section-icon">
+                        ◆
+                    </span>
+
+                    <h2>
+                        Device
+                    </h2>
+
+                </div>
+
+
+                <div class="cards-grid">
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            EDGE NAME
+                        </span>
+
+                        <strong
+                            id="edgeName"
+                            class="metric-value"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            DEVICE ID
+                        </span>
+
+                        <strong
+                            id="deviceId"
+                            class="metric-value"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            MODEL
+                        </span>
+
+                        <strong
+                            id="model"
+                            class="metric-value"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            ESP32 TEMPERATURE (INTERNAL)
+                        </span>
+
+                        <strong
+                            id="temperature"
+                            class="metric-value"
+                        >
+                            —
+                        </strong>
+
+                        <span class="metric-unit">
+                            °C
+                        </span>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            UPTIME
+                        </span>
+
+                        <strong
+                            id="uptime"
+                            class="metric-value metric-small"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            FREE HEAP
+                        </span>
+
+                        <strong
+                            id="heap"
+                            class="metric-value metric-small"
+                        >
+                            —
+                        </strong>
+
+                        <span class="metric-unit">
+                            bytes
+                        </span>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            FLASH
+                        </span>
+
+                        <strong
+                            id="flash"
+                            class="metric-value metric-small"
+                        >
+                            —
+                        </strong>
+
+                        <span class="metric-unit">
+                            bytes
+                        </span>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <span class="metric-label">
+                            FIRMWARE
+                        </span>
+
+                        <strong
+                            id="firmware"
+                            class="metric-value metric-small"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WIFI RECONFIGURATION -->
+
+            <section class="danger-zone">
+
+                <div>
+
+                    <p class="danger-title">
+                        Wi-Fi Configuration
+                    </p>
+
+                    <p class="danger-description">
+                        Change the Wi-Fi network
+                        connected to this device.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="reconfigureButton"
+                    class="secondary-button"
+                >
+                    Reconfigure Wi-Fi
+                </button>
+
+            </section>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="dashboardStatus"
+                class="status-message hidden"
+            ></div>
+
+
+            <p class="last-updated">
+                Last updated:
+                <span id="lastUpdated">
+                    —
+                </span>
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="/app.js"></script>
+
+</body>
+
+</html>

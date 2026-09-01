@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f5f5f7"
+    >
+
+    <title>ESP32 Health Monitor</title>
+
+    <link
+        rel="stylesheet"
+        href="/src/css/dashboard.css"
+    >
+</head>
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- ================================================= -->
+        <!-- HEADER -->
+        <!-- ================================================= -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    E
+                </div>
+
+                <div class="brand-text">
+                    <div class="brand-title">
+                        ESP32 Health Monitor
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Edge Network
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <!-- DEVICE -->
+
+                <div class="device-control">
+
+                    <label for="deviceSelect">
+                        DEVICE
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select id="deviceSelect">
+                            <option>
+                                Loading devices...
+                            </option>
+                        </select>
+
+                        <span class="select-chevron">
+                            ↓
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONNECTION -->
+
+                <div
+                    class="connection-status"
+                    id="connectionStatus"
+                >
+
+                    <span class="connection-dot"></span>
+
+                    <span id="connectionText">
+                        Connecting
+                    </span>
+
+                </div>
+
+
+                <!-- THEME -->
+
+                <button
+                    class="icon-button"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                >
+                    <span id="themeIcon">
+                        ◐
+                    </span>
+                </button>
+
+
+                <!-- LOGOUT -->
+
+                <button
+                    class="logout-button"
+                    id="logoutButton"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================================================= -->
+        <!-- DEVICE HEADER -->
+        <!-- ================================================= -->
+
+        <section class="device-header">
+
+            <div>
+
+                <div class="eyebrow">
+                    DEVICE
+                </div>
+
+                <h1 id="deviceName">
+                    ESP32-001
+                </h1>
+
+                <p
+                    class="device-model"
+                    id="deviceModel"
+                >
+                    ESP32-S3-N16R8
+                </p>
+
+            </div>
+
+
+            <div class="device-meta">
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        FIRMWARE
+                    </span>
+
+                    <span
+                        class="meta-value"
+                        id="firmwareVersion"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="meta-item">
+
+                    <span class="meta-label">
+                        LAST UPDATE
+                    </span>
+
+                    <span
+                        class="meta-value"
+                        id="lastUpdate"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- MAIN GRID -->
+        <!-- ================================================= -->
+
+        <main class="dashboard-grid">
+
+
+            <!-- ================================================= -->
+            <!-- WIFI CARD -->
+            <!-- ================================================= -->
+
+            <section class="dashboard-card">
+
+                <!-- WIFI OVERVIEW -->
+
+                <div
+                    class="card-view active"
+                    id="wifiOverview"
+                >
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-label">
+                                WI-FI
+                            </div>
+
+                            <h2>
+                                Connectivity
+                            </h2>
+
+                        </div>
+
+
+                        <div
+                            class="card-status good"
+                            id="wifiStatus"
+                        >
+
+                            <span class="status-dot"></span>
+
+                            <span>
+                                Excellent
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="primary-reading">
+
+                        <span id="wifiRssi">
+                            --
+                        </span>
+
+                        <small>
+                            dBm
+                        </small>
+
+                    </div>
+
+
+                    <p
+                        class="reading-description"
+                        id="wifiQuality"
+                    >
+                        Waiting for Wi-Fi telemetry
+                    </p>
+
+
+                    <div class="metric-row">
+
+                        <div class="metric">
+
+                            <span class="metric-label">
+                                QUALITY
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="wifiQualityValue"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="metric">
+
+                            <span class="metric-label">
+                                SIGNAL
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="wifiSignalLabel"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="history-button"
+                        data-target="wifi"
+                        type="button"
+                    >
+                        <span>
+                            View signal history
+                        </span>
+
+                        <span class="button-arrow">
+                            ↗
+                        </span>
+                    </button>
+
+                </div>
+
+
+                <!-- WIFI HISTORY -->
+
+                <div
+                    class="card-view"
+                    id="wifiHistory"
+                >
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-label">
+                                WI-FI
+                            </div>
+
+                            <h2>
+                                Signal history
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            class="back-button"
+                            data-target="wifi"
+                            type="button"
+                            aria-label="Back"
+                        >
+                            ←
+                        </button>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas id="wifiChart"></canvas>
+
+                    </div>
+
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="legend-dot normal"></i>
+                            Normal
+                        </span>
+
+                        <span>
+                            <i class="legend-dot good"></i>
+                            Good
+                        </span>
+
+                        <span>
+                            <i class="legend-dot spike"></i>
+                            Spike
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        class="history-summary"
+                        id="wifiHistorySummary"
+                    >
+                        Waiting for telemetry...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================================================= -->
+            <!-- ESP HEALTH CARD -->
+            <!-- ================================================= -->
+
+            <section class="dashboard-card">
+
+                <!-- HEALTH OVERVIEW -->
+
+                <div
+                    class="card-view active"
+                    id="healthOverview"
+                >
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-label">
+                                ESP HEALTH
+                            </div>
+
+                            <h2>
+                                Device condition
+                            </h2>
+
+                        </div>
+
+
+                        <div
+                            class="card-status good"
+                            id="healthStatus"
+                        >
+
+                            <span class="status-dot"></span>
+
+                            <span>
+                                Healthy
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="primary-reading">
+
+                        <span id="temperatureValue">
+                            --
+                        </span>
+
+                        <small>
+                            °C
+                        </small>
+
+                    </div>
+
+
+                    <p class="reading-description">
+                        Internal temperature
+                    </p>
+
+
+                    <div class="health-metrics">
+
+                        <div class="small-metric">
+
+                            <span class="metric-label">
+                                FREE HEAP
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="freeHeapValue"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="small-metric">
+
+                            <span class="metric-label">
+                                UPTIME
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="uptimeValue"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="small-metric">
+
+                            <span class="metric-label">
+                                MIN HEAP
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="minimumHeapValue"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+
+                        <div class="small-metric">
+
+                            <span class="metric-label">
+                                SAMPLES
+                            </span>
+
+                            <span
+                                class="metric-value"
+                                id="sampleCountValue"
+                            >
+                                --
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="history-button"
+                        data-target="health"
+                        type="button"
+                    >
+                        <span>
+                            View temperature history
+                        </span>
+
+                        <span class="button-arrow">
+                            ↗
+                        </span>
+                    </button>
+
+                </div>
+
+
+                <!-- HEALTH HISTORY -->
+
+                <div
+                    class="card-view"
+                    id="healthHistory"
+                >
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-label">
+                                ESP HEALTH
+                            </div>
+
+                            <h2>
+                                Temperature history
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            class="back-button"
+                            data-target="health"
+                            type="button"
+                            aria-label="Back"
+                        >
+                            ←
+                        </button>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas id="healthChart"></canvas>
+
+                    </div>
+
+
+                    <div class="chart-legend">
+
+                        <span>
+                            <i class="legend-dot good"></i>
+                            Healthy
+                        </span>
+
+                        <span>
+                            <i class="legend-dot normal"></i>
+                            Normal
+                        </span>
+
+                        <span>
+                            <i class="legend-dot spike"></i>
+                            Spike
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        class="history-summary"
+                        id="healthHistorySummary"
+                    >
+                        Waiting for telemetry...
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER -->
+        <!-- ================================================= -->
+
+        <footer class="footer">
+
+            <span>
+                ESP32 Edge Intelligence
+            </span>
+
+            <span class="firebase-status">
+
+                <span class="connection-dot"></span>
+
+                Firebase connected
+
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="/src/js/dashboard.js"
+    ></script>
+
+</body>
+
+</html>

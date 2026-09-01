@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f5f5f7"
+    >
+
+    <title>Sign In · ESP32 Health Monitor</title>
+
+    <link
+        rel="stylesheet"
+        href="/src/css/login.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <section class="login-layout">
+
+
+            <!-- =================================================
+                 LEFT BENTO PANEL
+            ================================================== -->
+
+            <section class="bento-card hero-card">
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+                        E
+                    </div>
+
+                    <div class="brand-name">
+                        ESP32 Health Monitor
+                    </div>
+
+                </div>
+
+
+                <div class="hero-content">
+
+                    <p class="eyebrow">
+                        EDGE INTELLIGENCE
+                    </p>
+
+                    <h1>
+                        Everything
+                        <br>
+
+                        <span class="gradient-text">
+                            connected.
+                        </span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Monitor your ESP32 devices,
+                        connectivity, performance and
+                        telemetry from one place.
+                    </p>
+
+                </div>
+
+
+                <!-- MINI BENTO -->
+
+                <div class="mini-grid">
+
+                    <div class="mini-card">
+
+                        <span class="mini-label">
+                            DEVICES
+                        </span>
+
+                        <strong>
+                            Live
+                        </strong>
+
+                        <span class="mini-description">
+                            Real-time monitoring
+                        </span>
+
+                    </div>
+
+
+                    <div class="mini-card">
+
+                        <span class="mini-label">
+                            TELEMETRY
+                        </span>
+
+                        <strong>
+                            24/7
+                        </strong>
+
+                        <span class="mini-description">
+                            Continuous insights
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LOGIN PANEL
+            ================================================== -->
+
+            <section class="bento-card login-card">
+
+
+                <!-- HEADER -->
+
+                <div class="login-header">
+
+                    <p class="eyebrow">
+                        WELCOME BACK
+                    </p>
+
+                    <h2>
+                        Sign in.
+                    </h2>
+
+                    <p>
+                        Access your monitoring dashboard.
+                    </p>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    id="loginForm"
+                    class="login-form"
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <div class="input-header">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <button
+                                type="button"
+                                id="forgotPassword"
+                                class="text-button"
+                            >
+                                Forgot?
+                            </button>
+
+                        </div>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                        aria-live="polite"
+                    ></div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+
+                        <span>
+                            Sign in
+                        </span>
+
+                        <span class="arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- FOOTER -->
+
+                <div class="login-footer">
+
+                    <span class="security-dot"></span>
+
+                    Secure Firebase authentication
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- PAGE FOOTER -->
+
+        <footer>
+
+            <span>
+                ESP32 WiFi Health Monitor
+            </span>
+
+            <span>
+                Private infrastructure
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <!-- =========================================================
+         LOGIN APPLICATION
+    ========================================================== -->
+
+    <script
+        type="module"
+        src="/src/js/login.js"
+    ></script>
+
+</body>
+
+</html>

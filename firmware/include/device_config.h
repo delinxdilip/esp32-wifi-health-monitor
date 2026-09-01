@@ -1,0 +1,16 @@
+#ifndef DEVICE_CONFIG_H
+#define DEVICE_CONFIG_H
+
+// ============================================================
+// DEVICE CONFIGURATION
+// ============================================================
+
+#define EDGE_NAME "ESP32-001"
+#define DEVICE_MODEL "ESP32-S3-N16R8"
+#define FIRMWARE_VERSION "1.0.0"
+#define DEVICE_HAS_RGB_LED true
+#define DEVICE_RGB_LED_PIN 48
+#define DEVICE_RGB_LED_COUNT 1
+#define DEVICE_RGB_BRIGHTNESS 40
+
+#endif

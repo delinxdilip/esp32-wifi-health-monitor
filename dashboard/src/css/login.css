@@ -1,0 +1,1104 @@
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f6f8;
+
+    color: #1f2937;
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.login-container {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 24px;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.login-card {
+    width: 100%;
+
+    max-width: 420px;
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+
+.login-header h1 {
+    margin: 0 0 8px;
+
+    font-size: 26px;
+}
+
+
+.login-header p {
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   FORM
+   ============================================================ */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.12);
+}
+
+
+/* ============================================================
+   LOGIN BUTTON
+   ============================================================ */
+
+#loginButton {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+#loginButton:hover {
+    background: #1d4ed8;
+}
+
+
+#loginButton:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.status {
+    margin: 16px 0 0;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+
+.status.error {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+.status.success {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+
+.hidden {
+    display: none;
+}
+/* ============================================================
+   RESET
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ============================================================
+   ROOT
+============================================================ */
+
+:root {
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    color: #1d1d1f;
+
+    background: #f5f5f7;
+}
+
+
+/* ============================================================
+   BODY
+============================================================ */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(120, 150, 255, 0.15),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(180, 120, 255, 0.12),
+            transparent 30%
+        ),
+
+        #f5f5f7;
+
+}
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.login-page {
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 32px;
+
+}
+
+
+/* ============================================================
+   BENTO LAYOUT
+============================================================ */
+
+.login-layout {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr
+        0.85fr;
+
+    gap: 18px;
+
+}
+
+
+/* ============================================================
+   BENTO CARD
+============================================================ */
+
+.bento-card {
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.8);
+
+    background:
+        rgba(255, 255, 255, 0.72);
+
+    box-shadow:
+
+        0 25px 60px
+        rgba(0, 0, 0, 0.06),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.9);
+
+    backdrop-filter:
+        blur(25px);
+
+    -webkit-backdrop-filter:
+        blur(25px);
+
+}
+
+
+/* ============================================================
+   HERO CARD
+============================================================ */
+
+.hero-card {
+
+    min-height: 650px;
+
+    padding: 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+
+    height: 380px;
+
+    border-radius: 50%;
+
+    right: -170px;
+
+    bottom: -170px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(85, 115, 255, 0.20),
+            rgba(160, 100, 255, 0.08)
+        );
+
+    filter: blur(4px);
+
+}
+
+
+/* ============================================================
+   BRAND
+============================================================ */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.brand-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #1d1d1f,
+            #4b4b4f
+        );
+
+    box-shadow:
+
+        0 8px 22px
+        rgba(0, 0, 0, 0.16);
+
+}
+
+
+.brand-name {
+
+    color: #6e6e73;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.01em;
+
+}
+
+
+/* ============================================================
+   HERO CONTENT
+============================================================ */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.eyebrow {
+
+    margin-bottom: 14px;
+
+    color: #86868b;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    letter-spacing: 0.06em;
+
+}
+
+
+.hero-content h1 {
+
+    font-size:
+        clamp(52px, 6vw, 82px);
+
+    line-height: 0.94;
+
+    letter-spacing: -0.065em;
+
+    font-weight: 700;
+
+}
+
+
+.gradient-text {
+
+    background:
+
+        linear-gradient(
+            110deg,
+            #1d1d1f,
+            #77777c 55%,
+            #8b7cf6
+        );
+
+    color: transparent;
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+}
+
+
+.hero-description {
+
+    max-width: 460px;
+
+    margin-top: 26px;
+
+    color: #6e6e73;
+
+    font-size: 17px;
+
+    line-height: 1.55;
+
+}
+
+
+/* ============================================================
+   MINI BENTO
+============================================================ */
+
+.mini-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.mini-card {
+
+    min-height: 125px;
+
+    padding: 20px;
+
+    border-radius: 21px;
+
+    background:
+        rgba(245, 245, 247, 0.72);
+
+    border:
+        1px solid
+        rgba(0, 0, 0, 0.04);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+.mini-label {
+
+    color: #86868b;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    letter-spacing: 0.05em;
+
+}
+
+
+.mini-card strong {
+
+    margin-top: 12px;
+
+    font-size: 25px;
+
+    letter-spacing: -0.04em;
+
+}
+
+
+.mini-description {
+
+    color: #86868b;
+
+    font-size: 12px;
+
+}
+
+
+/* ============================================================
+   LOGIN CARD
+============================================================ */
+
+.login-card {
+
+    min-height: 650px;
+
+    padding: 42px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+/* ============================================================
+   LOGIN HEADER
+============================================================ */
+
+.login-header {
+
+    margin-bottom: 36px;
+
+}
+
+
+.login-header h2 {
+
+    font-size: 48px;
+
+    line-height: 1;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 700;
+
+}
+
+
+.login-header p:last-child {
+
+    margin-top: 12px;
+
+    color: #86868b;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.login-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+
+/* ============================================================
+   INPUT GROUP
+============================================================ */
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.input-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.input-group label {
+
+    color: #424245;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.input-group input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding:
+        0 16px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        rgba(0, 0, 0, 0.08);
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    color: #1d1d1f;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.input-group input::placeholder {
+
+    color: #a1a1a6;
+
+}
+
+
+.input-group input:focus {
+
+    border-color:
+        rgba(100, 100, 110, 0.35);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(0, 0, 0, 0.04);
+
+}
+
+
+/* ============================================================
+   TEXT BUTTON
+============================================================ */
+
+.text-button {
+
+    border: none;
+
+    background: none;
+
+    color: #6e6e73;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.text-button:hover {
+
+    color: #1d1d1f;
+
+}
+
+
+/* ============================================================
+   LOGIN BUTTON
+============================================================ */
+
+.login-button {
+
+    width: 100%;
+
+    height: 54px;
+
+    padding:
+        0 18px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: #1d1d1f;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.login-button:hover {
+
+    background: #2d2d30;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.12);
+
+}
+
+
+.login-button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.login-button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* ============================================================
+   ARROW
+============================================================ */
+
+.arrow {
+
+    font-size: 20px;
+
+    font-weight: 400;
+
+    line-height: 1;
+
+}
+
+
+/* ============================================================
+   MESSAGE
+============================================================ */
+
+.login-message {
+
+    min-height: 18px;
+
+    color: #ff3b30;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.login-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 28px;
+
+    color: #86868b;
+
+    font-size: 11px;
+
+}
+
+
+.security-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #34c759;
+
+}
+
+
+/* ============================================================
+   PAGE FOOTER
+============================================================ */
+
+footer {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin:
+        18px auto 0;
+
+    padding:
+        0 6px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #a1a1a6;
+
+    font-size: 11px;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .login-page {
+
+        padding: 18px;
+
+    }
+
+
+    .login-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .hero-card {
+
+        min-height: 460px;
+
+    }
+
+
+    .login-card {
+
+        min-height: auto;
+
+        padding: 34px;
+
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .login-page {
+
+        padding: 12px;
+
+    }
+
+
+    .hero-card {
+
+        min-height: 430px;
+
+        padding: 26px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .login-card {
+
+        padding: 28px 22px;
+
+        border-radius: 24px;
+
+    }
+
+
+    .hero-content h1 {
+
+        font-size: 52px;
+
+    }
+
+
+    .login-header h2 {
+
+        font-size: 40px;
+
+    }
+
+
+    .mini-card {
+
+        min-height: 110px;
+
+        padding: 16px;
+
+    }
+
+
+    footer {
+
+        padding:
+            0 4px;
+
+        font-size: 10px;
+
+    }
+
+}
+
+/* ============================================================
+   FORGOT PASSWORD
+   ============================================================ */
+
+.forgot-password {
+    display: block;
+
+    margin: 18px auto 0;
+
+    padding: 0;
+
+    border: none;
+
+    background: none;
+
+    color: #2563eb;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
