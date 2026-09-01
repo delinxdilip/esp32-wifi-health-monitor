@@ -5,6 +5,7 @@
 #include <Preferences.h>
 
 #include "led_manager.h"
+#include "logger.h"
 
 
 namespace
@@ -54,24 +55,24 @@ bool loadSavedCredentials()
 
     if (savedSSID.length() == 0)
     {
-        Serial.println(
-            "[WIFI] No saved Wi-Fi credentials."
+        LOG_DEBUG(
+            "WIFI",
+            "No saved Wi-Fi credentials."
         );
 
         return false;
     }
 
 
-    Serial.println(
-        "[WIFI] Saved Wi-Fi credentials found."
+    LOG_DEBUG(
+        "WIFI",
+        "Saved Wi-Fi credentials found."
     );
 
-    Serial.print(
-        "[WIFI] SSID: "
-    );
-
-    Serial.println(
-        savedSSID
+    LOG_DEBUG(
+        "WIFI",
+        "SSID: %s",
+        savedSSID.c_str()
     );
 
     return true;
@@ -109,8 +110,9 @@ void saveCredentials(
     savedPassword = password;
 
 
-    Serial.println(
-        "[WIFI] Wi-Fi credentials saved."
+    LOG_DEBUG(
+        "WIFI",
+        "Wi-Fi credentials saved."
     );
 }
 
@@ -124,19 +126,18 @@ bool connectToWiFi(
     const String &password
 )
 {
-    Serial.println();
-    Serial.println(
-        "[WIFI] Connecting to Wi-Fi..."
+    LOG_INFO(
+        "WIFI",
+        "Connecting to Wi-Fi..."
     );
 
-    Serial.print(
-        "[WIFI] SSID: "
+    LOG_INFO(
+        "WIFI",
+        "SSID: %s",
+        ssid.c_str()
     );
 
-    Serial.println(
-        ssid
-    );
-
+    ledBlinkBlue(2);
 
     // White = connecting.
     ledWhite();
@@ -179,12 +180,7 @@ bool connectToWiFi(
     )
     {
         delay(500);
-
-        Serial.print(".");
     }
-
-
-    Serial.println();
 
 
     // ========================================================
@@ -193,28 +189,21 @@ bool connectToWiFi(
 
     if (WiFi.status() == WL_CONNECTED)
     {
-        Serial.println(
-            "[WIFI] Wi-Fi connected!"
+        LOG_INFO(
+            "WIFI",
+            "Wi-Fi connected!"
         );
 
-        Serial.print(
-            "[WIFI] IP address: "
+        LOG_INFO(
+            "WIFI",
+            "IP address: %s",
+            WiFi.localIP().toString().c_str()
         );
 
-        Serial.println(
-            WiFi.localIP()
-        );
-
-        Serial.print(
-            "[WIFI] RSSI: "
-        );
-
-        Serial.print(
+        LOG_INFO(
+            "WIFI",
+            "RSSI: %d dBm",
             WiFi.RSSI()
-        );
-
-        Serial.println(
-            " dBm"
         );
 
 
@@ -230,8 +219,9 @@ bool connectToWiFi(
     // FAILURE
     // ========================================================
 
-    Serial.println(
-        "[WIFI] Wi-Fi connection failed."
+    LOG_ERROR(
+        "WIFI",
+        "Wi-Fi connection failed."
     );
 
 
@@ -254,11 +244,12 @@ bool connectToWiFi(
 
 void startAccessPoint()
 {
-    Serial.println();
-    Serial.println(
-        "[WIFI] Starting provisioning mode..."
+    LOG_INFO(
+        "WIFI",
+        "Starting provisioning mode..."
     );
 
+    ledBlinkBlue(2);
 
     provisioningMode = true;
 
@@ -291,8 +282,9 @@ void startAccessPoint()
 
     if (!success)
     {
-        Serial.println(
-            "[WIFI] ERROR: Failed to start AP!"
+        LOG_ERROR(
+            "WIFI",
+            "Failed to start AP!"
         );
 
         ledRed();
@@ -301,35 +293,31 @@ void startAccessPoint()
     }
 
 
-    Serial.println();
-    Serial.println(
-        "================================"
+    LOG_INFO(
+        "WIFI",
+        "=============================="
     );
 
-    Serial.println(
+    LOG_INFO(
+        "WIFI",
         "Wi-Fi provisioning mode started"
     );
 
-    Serial.println(
-        "================================"
+    LOG_INFO(
+        "WIFI",
+        "=============================="
     );
 
-
-    Serial.print(
-        "[WIFI] Network: "
-    );
-
-    Serial.println(
+    LOG_INFO(
+        "WIFI",
+        "Network: %s",
         AP_SSID
     );
 
-
-    Serial.print(
-        "[WIFI] Setup IP: http://"
-    );
-
-    Serial.println(
-        WiFi.softAPIP()
+    LOG_INFO(
+        "WIFI",
+        "Setup IP: http://%s",
+        WiFi.softAPIP().toString().c_str()
     );
 
 
@@ -354,11 +342,12 @@ void startAccessPoint()
 
 void wifiManagerBegin()
 {
-    Serial.println();
-    Serial.println(
-        "[WIFI] Starting Wi-Fi manager..."
+    LOG_INFO(
+        "WIFI",
+        "Starting Wi-Fi manager..."
     );
 
+    ledBlinkBlue(2);
 
     provisioningMode = false;
 
@@ -380,8 +369,9 @@ void wifiManagerBegin()
         }
 
 
-        Serial.println(
-            "[WIFI] Saved Wi-Fi unavailable."
+        LOG_WARN(
+            "WIFI",
+            "Saved Wi-Fi unavailable."
         );
     }
 
@@ -392,8 +382,9 @@ void wifiManagerBegin()
      * Start provisioning AP.
      */
 
-    Serial.println(
-        "[WIFI] Entering provisioning mode."
+    LOG_INFO(
+        "WIFI",
+        "Entering provisioning mode."
     );
 
 
@@ -449,16 +440,17 @@ bool isWifiProvisioning()
 
 void wifiManagerStartProvisioning()
 {
-    Serial.println();
-    Serial.println(
-        "[WIFI] Reconfiguration requested."
+    LOG_INFO(
+        "WIFI",
+        "Reconfiguration requested."
     );
 
 
     if (provisioningMode)
     {
-        Serial.println(
-            "[WIFI] Already in provisioning mode."
+        LOG_DEBUG(
+            "WIFI",
+            "Already in provisioning mode."
         );
 
         return;
@@ -489,27 +481,32 @@ bool wifiManagerConfigure(
 {
     if (ssid.length() == 0)
     {
-        Serial.println(
-            "[WIFI] ERROR: SSID is empty."
+        LOG_ERROR(
+            "WIFI",
+            "SSID is empty."
         );
+
+        ledRed();
 
         return false;
     }
 
 
-    Serial.println();
-    Serial.println(
-        "================================"
+    LOG_INFO(
+        "WIFI",
+        "=============================="
     );
 
-    Serial.println(
+    LOG_INFO(
+        "WIFI",
         "Testing new Wi-Fi configuration"
     );
 
-    Serial.println(
-        "================================"
+    LOG_INFO(
+        "WIFI",
+        "=============================="
     );
-
+    ledBlinkBlue(2);
 
     /*
      * Remember that the old credentials are still
@@ -533,10 +530,12 @@ bool wifiManagerConfigure(
 
     if (!connected)
     {
-        Serial.println(
-            "[WIFI] New Wi-Fi configuration failed."
+        LOG_ERROR(
+            "WIFI",
+            "New Wi-Fi configuration failed."
         );
 
+        ledRed();
 
         /*
          * Return to provisioning mode so the user
@@ -554,8 +553,9 @@ bool wifiManagerConfigure(
     // SUCCESS
     // --------------------------------------------------------
 
-    Serial.println(
-        "[WIFI] New Wi-Fi configuration successful."
+    LOG_INFO(
+        "WIFI",
+        "New Wi-Fi configuration successful."
     );
 
 
@@ -597,8 +597,9 @@ bool wifiManagerConfigure(
     ledGreen();
 
 
-    Serial.println(
-        "[WIFI] Provisioning complete."
+    LOG_INFO(
+        "WIFI",
+        "Provisioning complete."
     );
 
 

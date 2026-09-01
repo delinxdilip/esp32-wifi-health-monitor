@@ -1,6 +1,8 @@
 #include "time_manager.h"
 
 #include <time.h>
+#include "logger.h"
+#include "led_manager.h"
 
 // ============================================================
 // NTP CONFIGURATION
@@ -18,8 +20,12 @@ static bool timeSynced = false;
 
 void timeManagerBegin()
 {
-    Serial.println();
-    Serial.println("[TIME] Starting NTP synchronization...");
+    LOG_INFO(
+        "TIME",
+        "Starting NTP synchronization..."
+    );
+
+    ledBlinkBlue(2);
 
     configTime(
         0,
@@ -34,18 +40,29 @@ void timeManagerBegin()
     {
         timeSynced = true;
 
-        Serial.println("[TIME] NTP synchronized.");
+        LOG_INFO(
+            "TIME",
+            "NTP synchronized."
+        );
 
-        Serial.print("[TIME] UTC: ");
-        Serial.println(getTimestamp());
+        LOG_INFO(
+            "TIME",
+            "UTC: %s",
+            getTimestamp().c_str()
+        );
+
+        ledGreen();
     }
     else
     {
         timeSynced = false;
 
-        Serial.println(
-            "[TIME] NTP synchronization failed."
+        LOG_ERROR(
+            "TIME",
+            "NTP synchronization failed."
         );
+
+        ledRed();
     }
 }
 

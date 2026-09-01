@@ -1,4 +1,5 @@
 #include "device_manager.h"
+#include "logger.h"
 
 // ============================================================
 // DEVICE CONFIGURATION
@@ -34,19 +35,25 @@ static const char* DEVICE_MODEL =
 
 void deviceManagerBegin()
 {
-    Serial.println();
-    Serial.println("==============================");
-    Serial.println("[DEVICE] Device identity");
-    Serial.println("==============================");
-
-    Serial.print("[DEVICE] ID: ");
-    Serial.println(DEVICE_ID);
-
-    Serial.print("[DEVICE] Name: ");
-    Serial.println(DEVICE_NAME);
-
-    Serial.print("[DEVICE] Model: ");
-    Serial.println(DEVICE_MODEL);
+    LOG_INFO(
+        "DEVICE",
+        "Device manager initialized."
+    );
+    LOG_INFO(
+        "DEVICE",
+        "Device ID: %s",
+        DEVICE_ID
+    );
+    LOG_INFO(
+        "DEVICE",
+        "Device Name: %s",
+        DEVICE_NAME
+    );
+    LOG_INFO(
+        "DEVICE",
+        "Device Model: %s",
+        DEVICE_MODEL
+    );
 }
 
 

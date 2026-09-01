@@ -1,4 +1,6 @@
 #include "led_manager.h"
+#include "device_config.h"
+#include "logger.h"
 
 #include <Adafruit_NeoPixel.h>
 
@@ -6,12 +8,9 @@
 // ONBOARD RGB LED
 // ============================================================
 
-#define RGB_LED_PIN   38
-#define RGB_LED_COUNT 1
-
 Adafruit_NeoPixel rgbLed(
-    RGB_LED_COUNT,
-    RGB_LED_PIN,
+    DEVICE_RGB_LED_COUNT,
+    DEVICE_RGB_LED_PIN,
     NEO_GRB + NEO_KHZ800
 );
 
@@ -46,12 +45,13 @@ void ledManagerBegin()
     rgbLed.begin();
 
     // Keep the onboard LED reasonably dim.
-    rgbLed.setBrightness(40);
+    rgbLed.setBrightness(DEVICE_RGB_BRIGHTNESS);
 
     ledOff();
 
-    Serial.println(
-        "[LED] RGB LED initialized."
+    LOG_INFO(
+        "LED",
+        "RGB LED initialized."
     );
 }
 
@@ -84,9 +84,42 @@ void ledWhite()
     setLED(255, 255, 255);
 }
 
+void ledYellow()
+{
+    setLED(255, 255, 0);
+}
+
+void ledCyan()
+{
+    setLED(0, 255, 255);
+}
+
+void ledMagenta()
+{
+    setLED(255, 0, 255);
+}
+
+void ledOrange()
+{
+    setLED(255, 165, 0);
+}
+
+
 // ============================================================
 // BLINK FUNCTIONS
 // ============================================================
+
+void ledBlinkWhite(uint8_t times)
+{
+    for (uint8_t i = 0; i < times; i++)
+    {
+        ledWhite();
+        delay(300);
+
+        ledOff();
+        delay(300);
+    }
+}
 
 void ledBlinkRed(uint8_t times)
 {
@@ -117,6 +150,54 @@ void ledBlinkBlue(uint8_t times)
     for (uint8_t i = 0; i < times; i++)
     {
         ledBlue();
+        delay(300);
+
+        ledOff();
+        delay(300);
+    }
+}
+
+void ledBlinkYellow(uint8_t times)
+{
+    for (uint8_t i = 0; i < times; i++)
+    {
+        ledYellow();
+        delay(300);
+
+        ledOff();
+        delay(300);
+    }
+}
+
+void ledBlinkCyan(uint8_t times)
+{
+    for (uint8_t i = 0; i < times; i++)
+    {
+        ledCyan();
+        delay(300);
+
+        ledOff();
+        delay(300);
+    }
+}
+
+void ledBlinkMagenta(uint8_t times)
+{
+    for (uint8_t i = 0; i < times; i++)
+    {
+        ledMagenta();
+        delay(300);
+
+        ledOff();
+        delay(300);
+    }
+}
+
+void ledBlinkOrange(uint8_t times)
+{
+    for (uint8_t i = 0; i < times; i++)
+    {
+        ledOrange();
         delay(300);
 
         ledOff();

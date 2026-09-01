@@ -5,6 +5,8 @@
 #include "device_manager.h"
 #include "device_config.h"
 #include "time_manager.h"
+#include "logger.h"
+#include "led_manager.h"
 
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
@@ -118,8 +120,9 @@ void firebaseAuthCallback(
 {
     if (result.isEvent())
     {
-        Serial.printf(
-            "[FIREBASE] Event: %s - %s\n",
+        LOG_INFO(
+            "FIREBASE",
+            "Event: %s - %s",
             result.uid().c_str(),
             result.eventLog().message().c_str()
         );
@@ -128,8 +131,9 @@ void firebaseAuthCallback(
 
     if (result.isError())
     {
-        Serial.printf(
-            "[FIREBASE] Error: %s (%d)\n",
+        LOG_ERROR(
+            "FIREBASE",
+            "Error: %s (%d)",
             result.error().message().c_str(),
             result.error().code()
         );
@@ -155,9 +159,9 @@ static void registerDevice()
     }
 
 
-    Serial.println();
-    Serial.println(
-        "[FIREBASE] Registering device..."
+    LOG_INFO(
+        "FIREBASE",
+        "Registering device..."
     );
 
 
@@ -233,17 +237,16 @@ static void registerDevice()
     deviceRegistered = true;
 
 
-    Serial.println(
-        "[FIREBASE] Device registration requested."
+    LOG_INFO(
+        "FIREBASE",
+        "Device registration requested."
     );
 
 
-    Serial.print(
-        "[FIREBASE] Device path: "
-    );
-
-    Serial.println(
-        basePath
+    LOG_INFO(
+        "FIREBASE",
+        "Device path: %s",
+        basePath.c_str()
     );
 }
 
@@ -349,64 +352,45 @@ static void collectTelemetrySample()
     // Serial debug
     // --------------------------------------------------------
 
-    Serial.println();
-
-    Serial.println(
-        "[FIREBASE] Telemetry sample"
+    
+    LOG_DEBUG(
+        "FIREBASE",
+        "Telemetry sample"
     );
 
-
-    Serial.print(
-        "[FIREBASE] Temperature: "
+    LOG_DEBUG(
+        "FIREBASE",
+        "Temperature: %.2f",
+        temperature
     );
 
-    Serial.println(
-        temperature,
-        2
-    );
-
-
-    Serial.print(
-        "[FIREBASE] RSSI: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "RSSI: %d",
         rssi
     );
 
-
-    Serial.print(
-        "[FIREBASE] Quality: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Quality: %d",
         quality
     );
 
-
-    Serial.print(
-        "[FIREBASE] Free heap: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Free heap: %d",
         heap
     );
 
-
-    Serial.print(
-        "[FIREBASE] Minimum heap: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Minimum heap: %d",
         minimumHeap
     );
 
-
-    Serial.print(
-        "[FIREBASE] Samples: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Sample count: %d",
         sampleCount
     );
 }
@@ -426,8 +410,9 @@ static void sendTelemetry()
 
     if (sampleCount == 0)
     {
-        Serial.println(
-            "[FIREBASE] No telemetry samples."
+        LOG_DEBUG(
+            "FIREBASE",
+            "No telemetry samples."
         );
 
         resetTelemetry();
@@ -470,8 +455,9 @@ static void sendTelemetry()
 
     if (espTimestamp.length() == 0)
     {
-        Serial.println(
-            "[FIREBASE] ESP32 timestamp unavailable."
+        LOG_DEBUG(
+            "FIREBASE",
+            "ESP32 timestamp unavailable."
         );
 
         espTimestamp =
@@ -702,12 +688,12 @@ static void sendTelemetry()
     // Push telemetry
     // --------------------------------------------------------
 
-    Serial.println();
-
-    Serial.println(
-        "[FIREBASE] Sending telemetry..."
+    LOG_INFO(
+        "FIREBASE",
+        "Sending telemetry..."
     );
 
+    ledBlinkBlue(1);
 
     database.push<object_t>(
         firebaseClient,
@@ -718,45 +704,32 @@ static void sendTelemetry()
     );
 
 
-    Serial.println(
-        "[FIREBASE] Telemetry push requested."
+    LOG_DEBUG(
+        "FIREBASE",
+        "Telemetry push requested."
     );
 
-
-    Serial.print(
-        "[FIREBASE] Samples collected: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Samples collected: %d",
         sampleCount
     );
 
-
-    Serial.print(
-        "[FIREBASE] Average temperature: "
+    LOG_DEBUG(
+        "FIREBASE",
+        "Average temperature: %.2f",
+        averageTemperature
     );
 
-    Serial.println(
-        averageTemperature,
-        2
+    LOG_DEBUG(
+        "FIREBASE",
+        "Average free heap: %.0f",
+        averageHeap
     );
 
-
-    Serial.print(
-        "[FIREBASE] Average free heap: "
-    );
-
-    Serial.println(
-        averageHeap,
-        0
-    );
-
-
-    Serial.print(
-        "[FIREBASE] Minimum free heap: "
-    );
-
-    Serial.println(
+    LOG_DEBUG(
+        "FIREBASE",
+        "Minimum free heap: %d",
         minimumHeap
     );
 
@@ -785,11 +758,14 @@ void firebaseTelemetryCallback(
 
     if (result.isError())
     {
-        Serial.printf(
-            "[FIREBASE] Telemetry error: %s (%d)\n",
+        LOG_ERROR(
+            "FIREBASE",
+            "Telemetry error: %s (%d)",
             result.error().message().c_str(),
             result.error().code()
         );
+
+        ledRed();
 
         return;
     }
@@ -797,13 +773,13 @@ void firebaseTelemetryCallback(
 
     if (result.available())
     {
-        Serial.print(
-            "[FIREBASE] Telemetry write result: "
-        );
-
-        Serial.println(
+        LOG_DEBUG(
+            "FIREBASE",
+            "Telemetry write result: %s",
             result.c_str()
         );
+
+        ledGreen();
     }
 }
 
@@ -814,35 +790,41 @@ void firebaseTelemetryCallback(
 
 void firebaseManagerBegin()
 {
-    Serial.println();
-
-    Serial.println(
+    LOG_INFO(
+        "FIREBASE",
         "=============================="
     );
 
-    Serial.println(
-        "[FIREBASE] Initializing..."
+    LOG_INFO(
+        "FIREBASE",
+        "Initializing..."
     );
 
-    Serial.println(
+    LOG_INFO(
+        "FIREBASE",
         "=============================="
     );
 
+    ledBlinkBlue(2);
 
     if (WiFi.status() != WL_CONNECTED)
     {
-        Serial.println(
-            "[FIREBASE] Wi-Fi is not connected."
+        LOG_WARN(
+            "FIREBASE",
+            "Wi-Fi is not connected."
         );
 
         firebaseConnected = false;
+
+        ledRed();
 
         return;
     }
 
 
-    Serial.println(
-        "[FIREBASE] Wi-Fi available."
+    LOG_INFO(
+        "FIREBASE",
+        "Wi-Fi available."
     );
 
 
@@ -857,8 +839,9 @@ void firebaseManagerBegin()
     // Authentication
     // --------------------------------------------------------
 
-    Serial.println(
-        "[FIREBASE] Initializing authentication..."
+    LOG_INFO(
+        "FIREBASE",
+        "Initializing authentication..."
     );
 
 
@@ -885,10 +868,12 @@ void firebaseManagerBegin()
     );
 
 
-    Serial.println(
-        "[FIREBASE] Firebase manager initialized."
+    LOG_INFO(
+        "FIREBASE",
+        "Firebase manager initialized."
     );
 
+    ledGreen();
 
     firebaseConnected = false;
 
@@ -924,16 +909,17 @@ void firebaseManagerLoop()
         {
             firebaseConnected = true;
 
-
-            Serial.println();
-
-            Serial.println(
-                "[FIREBASE] Authentication ready."
+            LOG_INFO(
+                "FIREBASE",
+                "Authentication ready."
             );
 
-            Serial.println(
-                "[FIREBASE] Firebase connected."
+            LOG_INFO(
+                "FIREBASE",
+                "Firebase connected."
             );
+
+            ledGreen();
         }
 
 

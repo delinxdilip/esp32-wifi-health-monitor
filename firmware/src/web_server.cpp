@@ -6,6 +6,8 @@
 #include <WebServer.h>
 #include <LittleFS.h>
 #include <WiFi.h>
+#include "logger.h"
+#include "led_manager.h"
 
 
 namespace
@@ -104,12 +106,10 @@ bool serveFile(
 {
     if (!LittleFS.exists(path))
     {
-        Serial.print(
-            "[WEB] File not found: "
-        );
-
-        Serial.println(
-            path
+        LOG_DEBUG(
+            "WEB",
+            "File not found: %s",
+            path.c_str()
         );
 
         return false;
@@ -125,12 +125,10 @@ bool serveFile(
 
     if (!file)
     {
-        Serial.print(
-            "[WEB] Failed to open: "
-        );
-
-        Serial.println(
-            path
+        LOG_DEBUG(
+            "WEB",
+            "Failed to open: %s",
+            path.c_str()
         );
 
         return false;
@@ -212,11 +210,12 @@ void handleSave()
         server.arg("password");
 
 
-    Serial.println();
-    Serial.println(
-        "[WEB] Received Wi-Fi configuration."
+    LOG_DEBUG(
+        "WEB",
+        "Received Wi-Fi configuration."
     );
 
+    ledBlinkBlue(2);
 
     if (ssid.length() == 0)
     {
@@ -410,10 +409,9 @@ void handleStatus()
 
     float temperature =
         getInternalTemperature();
-    Serial.print(
-        "[WEB] Internal temperature: "
-    );
-    Serial.println(
+    LOG_DEBUG(
+        "WEB",
+        "Internal temperature: %.2f",
         temperature
     );
 
@@ -515,9 +513,9 @@ void handleStatus()
 
 void handleReconfigure()
 {
-    Serial.println();
-    Serial.println(
-        "[WEB] Reconfigure Wi-Fi requested."
+    LOG_DEBUG(
+        "WEB",
+        "Reconfigure Wi-Fi requested."
     );
 
 
@@ -553,12 +551,10 @@ void handleReconfigure()
 
 void handleNotFound()
 {
-    Serial.print(
-        "[WEB] 404: "
-    );
-
-    Serial.println(
-        server.uri()
+    LOG_DEBUG(
+        "WEB",
+        "404: %s",
+        server.uri().c_str()
     );
 
 
@@ -709,11 +705,12 @@ void setupRoutes()
 
 void webServerBegin()
 {
-    Serial.println();
-    Serial.println(
-        "[WEB] Starting web server..."
+    LOG_INFO(
+        "WEB",
+        "Starting web server..."
     );
 
+    ledBlinkBlue(2);
 
     // --------------------------------------------------------
     // LittleFS
@@ -721,16 +718,20 @@ void webServerBegin()
 
     if (!LittleFS.begin(true))
     {
-        Serial.println(
-            "[WEB] ERROR: LittleFS mount failed!"
+        LOG_ERROR(
+            "WEB",
+            "LittleFS mount failed!"
         );
+
+        ledRed();
 
         return;
     }
 
 
-    Serial.println(
-        "[WEB] LittleFS mounted."
+    LOG_INFO(
+        "WEB",
+        "LittleFS mounted."
     );
 
 
@@ -748,29 +749,27 @@ void webServerBegin()
     server.begin();
 
 
-    Serial.println(
-        "[WEB] HTTP server started."
+    LOG_INFO(
+        "WEB",
+        "HTTP server started."
     );
 
+    ledGreen();
 
     if (isWifiProvisioning())
     {
-        Serial.print(
-            "[WEB] Setup page: http://"
-        );
-
-        Serial.println(
-            WiFi.softAPIP()
+        LOG_INFO(
+            "WEB",
+            "Setup page: http://%s",
+            WiFi.softAPIP().toString().c_str()
         );
     }
     else if (isWifiConnected())
     {
-        Serial.print(
-            "[WEB] Dashboard: http://"
-        );
-
-        Serial.println(
-            WiFi.localIP()
+        LOG_INFO(
+            "WEB",
+            "Dashboard: http://%s",
+            WiFi.localIP().toString().c_str()
         );
     }
 }
