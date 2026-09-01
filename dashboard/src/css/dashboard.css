@@ -1,0 +1,986 @@
+/* ============================================================
+   ROOT
+============================================================ */
+
+:root {
+    --bg: #f5f5f7;
+    --card: rgba(255, 255, 255, 0.88);
+    --card-solid: #ffffff;
+
+    --text: #1d1d1f;
+    --secondary: #6e6e73;
+    --muted: #86868b;
+
+    --border: rgba(0, 0, 0, 0.07);
+
+    --blue: #0071e3;
+    --green: #34c759;
+    --red: #ff3b30;
+    --orange: #ff9500;
+
+    --shadow:
+        0 20px 50px rgba(0, 0, 0, 0.06);
+
+    --radius: 28px;
+
+    --transition:
+        220ms cubic-bezier(.2, .8, .2, 1);
+}
+
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+html.dark {
+    --bg: #101012;
+
+    --card: rgba(29, 29, 31, 0.94);
+    --card-solid: #1d1d1f;
+
+    --text: #f5f5f7;
+    --secondary: #a1a1a6;
+    --muted: #86868b;
+
+    --border: rgba(255, 255, 255, 0.09);
+
+    --shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ============================================================
+   RESET
+============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+
+    transition:
+        background var(--transition),
+        color var(--transition);
+}
+
+
+/* ============================================================
+   APP
+============================================================ */
+
+.app-shell {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 42px 0 28px;
+}
+
+
+/* ============================================================
+   TOP BAR
+============================================================ */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 32px;
+    margin-bottom: 72px;
+}
+
+
+/* ============================================================
+   BRAND
+============================================================ */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: var(--text);
+    color: var(--bg);
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brand-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+.brand-subtitle {
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   TOP ACTIONS
+============================================================ */
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* ============================================================
+   DEVICE CONTROL
+============================================================ */
+
+.device-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.device-control label {
+    color: var(--muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+.select-wrapper {
+    position: relative;
+    min-width: 150px;
+}
+
+.select-wrapper select {
+    appearance: none;
+
+    width: 100%;
+    height: 40px;
+
+    padding: 0 42px 0 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: var(--card-solid);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.03);
+
+    transition:
+        border var(--transition),
+        box-shadow var(--transition);
+}
+
+.select-wrapper select:hover {
+    border-color: rgba(0, 113, 227, 0.25);
+}
+
+.select-wrapper select:focus {
+    border-color: var(--blue);
+
+    box-shadow:
+        0 0 0 3px rgba(0, 113, 227, 0.12);
+}
+
+.select-chevron {
+    position: absolute;
+
+    right: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+
+    color: var(--secondary);
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   CONNECTION
+============================================================ */
+
+.connection-status {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--secondary);
+
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.connection-dot,
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--orange);
+
+    flex: 0 0 auto;
+}
+
+.connection-status.connected .connection-dot {
+    background: var(--green);
+
+    box-shadow:
+        0 0 0 3px rgba(52, 199, 89, 0.12);
+}
+
+.connection-status.disconnected .connection-dot {
+    background: var(--red);
+
+    box-shadow:
+        0 0 0 3px rgba(255, 59, 48, 0.12);
+}
+
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+
+.logout-button,
+.icon-button {
+    border: 0;
+
+    background: transparent;
+    color: var(--secondary);
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        color var(--transition),
+        background var(--transition);
+}
+
+.logout-button {
+    font-size: 12px;
+    padding: 8px 4px;
+}
+
+.logout-button:hover {
+    color: var(--text);
+}
+
+.icon-button {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    font-size: 17px;
+}
+
+.icon-button:hover {
+    background: var(--border);
+    color: var(--text);
+}
+
+
+/* ============================================================
+   DEVICE HEADER
+============================================================ */
+
+.device-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 28px;
+}
+
+.eyebrow,
+.card-label,
+.meta-label,
+.metric-label {
+    color: var(--muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.device-header h1 {
+    margin: 8px 0 2px;
+
+    font-size: clamp(48px, 6vw, 64px);
+
+    line-height: 0.95;
+
+    letter-spacing: -3px;
+
+    font-weight: 700;
+}
+
+.device-model {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   DEVICE META
+============================================================ */
+
+.device-meta {
+    display: flex;
+    gap: 42px;
+
+    padding-bottom: 4px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.meta-value {
+    font-size: 13px;
+    color: var(--text);
+}
+
+
+/* ============================================================
+   DASHBOARD GRID
+============================================================ */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 22px;
+
+    align-items: stretch;
+}
+
+
+/* ============================================================
+   DASHBOARD CARD
+============================================================ */
+
+.dashboard-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 475px;
+
+    padding: 26px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    background: var(--card);
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   CARD VIEWS
+   IMPORTANT:
+   Both overview + history remain absolute.
+   This prevents layout collisions.
+============================================================ */
+
+.card-view {
+    position: absolute;
+
+    inset: 26px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        visibility 180ms ease;
+}
+
+.card-view.active {
+    position: absolute;
+
+    inset: 26px;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* ============================================================
+   CARD HEADER
+============================================================ */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    flex: 0 0 auto;
+}
+
+.card-header h2 {
+    margin: 7px 0 0;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    letter-spacing: -0.4px;
+}
+
+
+/* ============================================================
+   STATUS
+============================================================ */
+
+.card-status {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 11px;
+}
+
+.card-status.good {
+    color: var(--green);
+}
+
+.card-status.normal {
+    color: var(--blue);
+}
+
+.card-status.warning {
+    color: var(--orange);
+}
+
+.card-status.danger {
+    color: var(--red);
+}
+
+.card-status.good .status-dot {
+    background: var(--green);
+}
+
+.card-status.normal .status-dot {
+    background: var(--blue);
+}
+
+.card-status.warning .status-dot {
+    background: var(--orange);
+}
+
+.card-status.danger .status-dot {
+    background: var(--red);
+}
+
+
+/* ============================================================
+   PRIMARY READING
+============================================================ */
+
+.primary-reading {
+    display: flex;
+    align-items: baseline;
+
+    gap: 7px;
+
+    margin-top: 58px;
+
+    flex: 0 0 auto;
+}
+
+.primary-reading > span {
+    font-size: 78px;
+
+    line-height: 0.9;
+
+    letter-spacing: -5px;
+
+    font-weight: 600;
+}
+
+.primary-reading small {
+    color: var(--secondary);
+
+    font-size: 14px;
+}
+
+.reading-description {
+    margin: 12px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   WIFI METRICS
+============================================================ */
+
+.metric-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 28px;
+
+    flex: 0 0 auto;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.metric-value {
+    color: var(--text);
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   HEALTH METRICS
+============================================================ */
+
+.health-metrics {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    flex: 0 0 auto;
+}
+
+.small-metric {
+    min-width: 0;
+    min-height: 58px;
+
+    padding: 13px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    background:
+        rgba(128, 128, 128, 0.045);
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    overflow: hidden;
+}
+
+.small-metric .metric-value {
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   HISTORY BUTTON
+============================================================ */
+
+.history-button {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: auto;
+
+    padding: 0 14px;
+
+    border: 0;
+    border-radius: 13px;
+
+    background:
+        rgba(128, 128, 128, 0.08);
+
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+
+    flex: 0 0 auto;
+
+    transition:
+        background var(--transition),
+        transform var(--transition);
+}
+
+.history-button:hover {
+    background:
+        rgba(128, 128, 128, 0.13);
+
+    transform: translateY(-1px);
+}
+
+.button-arrow {
+    color: var(--secondary);
+    font-size: 16px;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+============================================================ */
+
+.back-button {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background:
+        rgba(128, 128, 128, 0.08);
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition);
+}
+
+.back-button:hover {
+    background:
+        rgba(128, 128, 128, 0.15);
+}
+
+
+/* ============================================================
+   CHART
+============================================================ */
+
+.chart-container {
+    position: relative;
+
+    width: 100%;
+    height: 245px;
+
+    margin-top: 25px;
+
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+.chart-container canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+}
+
+
+/* ============================================================
+   LEGEND
+============================================================ */
+
+.chart-legend {
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 12px;
+
+    color: var(--secondary);
+
+    font-size: 10px;
+
+    flex: 0 0 auto;
+}
+
+.chart-legend span {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.legend-dot.normal {
+    background: var(--blue);
+}
+
+.legend-dot.good {
+    background: var(--green);
+}
+
+.legend-dot.spike {
+    background: var(--red);
+}
+
+
+/* ============================================================
+   HISTORY SUMMARY
+============================================================ */
+
+.history-summary {
+    margin-top: auto;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    flex: 0 0 auto;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding: 0 6px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.firebase-status {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+}
+
+.firebase-status .connection-dot {
+    background: var(--green);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 850px) {
+
+    .app-shell {
+        width: min(
+            100% - 28px,
+            650px
+        );
+
+        padding-top: 24px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        margin-bottom: 50px;
+    }
+
+    .topbar-actions {
+        width: 100%;
+
+        justify-content: space-between;
+
+        flex-wrap: wrap;
+    }
+
+    .device-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .device-meta {
+        padding-bottom: 0;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .app-shell {
+        width: calc(100% - 20px);
+    }
+
+    .device-control {
+        width: 100%;
+
+        justify-content: space-between;
+    }
+
+    .select-wrapper {
+        flex: 1;
+
+        max-width: 220px;
+    }
+
+    .connection-status {
+        order: 3;
+    }
+
+    .logout-button {
+        order: 4;
+    }
+
+    .device-header h1 {
+        font-size: 46px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .dashboard-card {
+        min-height: 440px;
+
+        padding: 22px;
+    }
+
+    .card-view,
+    .card-view.active {
+        inset: 22px;
+    }
+
+    .primary-reading > span {
+        font-size: 65px;
+    }
+
+    .device-meta {
+        gap: 28px;
+    }
+
+    .health-metrics {
+        gap: 8px;
+    }
+
+    .small-metric {
+        padding: 11px;
+    }
+}
